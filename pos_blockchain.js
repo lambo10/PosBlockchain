@@ -8,12 +8,12 @@ import Shard from './shard.js';
 import CrossChainTransaction from './cross_chain_transaction.js';
 
 class PoSBlockchain {
-    constructor(validators = [], shardCount = 4, dbPath = './blockchain_data') {
-      this.storage = new Storage(dbPath);
-      this.validators = validators;
-      this.shards = Array.from({ length: shardCount }, (_, index) => new Shard(index));
-      this.init();
-    }
+  constructor(validators = [], dbPath = './blockchain_data', chainId = 94) {
+    this.storage = new Storage(dbPath);
+    this.validators = validators;
+    this.chainId = chainId;
+    this.init();
+  }
 
   async init() {
     const genesisBlock = await this.storage.get(0);

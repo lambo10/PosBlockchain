@@ -4,8 +4,9 @@ import { Transaction, TransactionInput } from './transaction.js';
 import PoSBlockchain from './pos_blockchain.js';
 import Validator from './validator.js';
 
+const chainId = 94; 
 const validators = [new Validator('validator1', 50), new Validator('validator2', 100)];
-const blockchain = new PoSBlockchain(validators);
+const blockchain = new PoSBlockchain(validators, './blockchain_data', chainId);
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req;

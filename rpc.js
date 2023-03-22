@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import PoSBlockchain from './pos_blockchain.js';
+import Validator from './validator.js';
 
 const app = express();
 app.use(bodyParser.json());
