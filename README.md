@@ -76,11 +76,13 @@ To connect more nodes to your network, simply run the index.js script with diffe
 Node 1:
 
 bash
-Copy code
+
 node index.js 3000 localhost:3001
+
+
 Node 2:
 
 bash
-Copy code
+
 node index.js 3001 localhost:3000
 In this example, Node 1 listens on port 3000 and tries to connect to Node 2 (localhost:3001), while Node 2 listens on port 3001 and tries to connect to Node 1 (localhost:3000).
