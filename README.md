@@ -1,5 +1,5 @@
-Custom Proof of Stake Blockchain Documentation
-This documentation covers the custom Proof of Stake (PoS) blockchain, including integration with MetaMask, starting a node and its APIs, and writing and deploying smart contracts to the blockchain.
+Custom Proof of Stake Blockchain
+This repository contains the implementation of a custom Proof of Stake (PoS) blockchain, including integration with MetaMask, starting a node and its APIs, and writing and deploying smart contracts to the blockchain.
 
 Overview
 The custom PoS blockchain consists of the following components:
@@ -66,5 +66,4 @@ Use a tool like Truffle or Hardhat to deploy the smart contract to the custom Po
 Configure the deployment tool to use the JSON-RPC URL of your blockchain (e.g., http://localhost:3000/jsonrpc).
 Specify the private key of the account that will deploy the smart contract.
 Create a deployment script to deploy the smart contract using the bytecode and ABI generated in step 1.
-Run the deployment script to deploy the smart contract to the custom PoS blockchain.
-Once the smart contract is deployed, you can interact with it using the JSON-RPC API and MetaMask.
+Run the deployment script to deploy the smart contract to the custom PoS blockchain
