@@ -1,0 +1,16 @@
+{
+  "name": "PosBlockchain",
+  "version": "1.0.0",
+  "description": "A Proof of stake blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ethereumjs/tx": "^4.1.1",
+    "ethereumjs-vm": "^4.2.0"
+  },
+  "type": "module"
+}
