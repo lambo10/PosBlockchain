@@ -70,3 +70,17 @@ Compile the smart contract using the Solidity compiler, solc. This will generate
     Create a deployment script to deploy the smart contract using the bytecode and ABI generated in step 1.
     Run the deployment script to deploy the smart contract to the custom PoS blockchain.
     Once the smart contract is deployed, you can interact with it using the JSON-RPC API and MetaMask.
+
+To connect more nodes to your network, simply run the index.js script with different port numbers and seed nodes as command-line arguments. For example, you can start two nodes with the following commands in separate terminals:
+
+Node 1:
+
+bash
+Copy code
+node index.js 3000 localhost:3001
+Node 2:
+
+bash
+Copy code
+node index.js 3001 localhost:3000
+In this example, Node 1 listens on port 3000 and tries to connect to Node 2 (localhost:3001), while Node 2 listens on port 3001 and tries to connect to Node 1 (localhost:3000).
