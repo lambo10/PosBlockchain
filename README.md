@@ -17,7 +17,7 @@ To add the custom PoS blockchain to MetaMask, follow these steps:
     Fill in the following details:
     Network Name: Enter a name for your custom PoS blockchain.
     New RPC URL: Enter the URL of the JSON-RPC server (e.g., http://localhost:3590/jsonrpc).
-    Chain ID: Provide a unique Chain ID for your network.
+    Chain ID: Enter 94.
     Currency Symbol (optional): Enter the symbol of the native cryptocurrency.
     Block Explorer URL (optional): If available, provide the URL of the block explorer for your blockchain.
     Click "Save" to add the custom PoS blockchain to MetaMask.
