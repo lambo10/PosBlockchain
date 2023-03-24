@@ -1,8 +1,17 @@
 class Validator {
-    constructor(address, stake) {
+    constructor(address, stake, mining = false) {
       this.address = address;
       this.stake = stake;
       this.lastSelectedTimestamp = 0;
+      this.mining = mining;
+    }
+
+    startMining() {
+      this.mining = true;
+    }
+  
+    stopMining() {
+      this.mining = false;
     }
   
     updateLastSelectedTimestamp() {

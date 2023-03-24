@@ -68,18 +68,17 @@ class Shard {
   pickValidator() {
     const totalStake = this.validators.reduce((sum, validator) => sum + validator.stake, 0);
     const stakeTarget = Math.random() * totalStake;
-
-    let currentStake = 0;
+    let accumulatedStake = 0;
     for (const validator of this.validators) {
-      currentStake += validator.stake;
-
-      if (currentStake >= stakeTarget) {
+      accumulatedStake += validator.stake;
+      if (accumulatedStake >= stakeTarget) {
         return validator;
       }
     }
-
-    return this.validators[0];
+    // Fallback to the last validator if none were selected
+    return this.validators[this.validators.length - 1];
   }
+  
 }
 
 export default Shard;

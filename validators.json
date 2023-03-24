@@ -1,0 +1,17 @@
+{
+  "validators": [
+    {
+      "address": "validator1",
+      "stake": 100
+    },
+    {
+      "address": "validator2",
+      "stake": 150
+    },
+    {
+      "address": "validator3",
+      "stake": 200
+    }
+  ],
+  "CURRENT_VALIDATOR_ADDRESS": "validator1"
+}
