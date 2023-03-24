@@ -406,7 +406,7 @@ async isValidChain() {
 }
 
 getChainId() {
-  return this.chainId;
+  return this.chainId.toString(16);
 }
 
 async eth_blockNumber() {

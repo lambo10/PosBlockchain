@@ -16,8 +16,8 @@ const validators = [
   const blockchain = new PoSBlockchain(validators,currentValidator);
 
   app.post('/jsonrpc', async (req, res) => {
-    const { id, method, params } = req.body;
-  
+
+    console.log(id+" --- "+method+" ----- "+params);
     if (method === 'eth_protocolVersion') {
         const result = blockchain.getProtocolVersion();
         res.json({ jsonrpc: '2.0', id, result });
