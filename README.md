@@ -7,7 +7,6 @@ Getting Started
 
 
     code snippet:
-
     import PoSBlockchain from './pos_blockchain.js';
     import fs from 'fs/promises';
     async function main() {
@@ -26,7 +25,6 @@ Getting Started
     In the index.js file, to connect to an existing node, modify the following line:
 
     code snippet:
-
     const blockchain = new PoSBlockchain(validators, currentValidatorAddress);
 
 
@@ -34,7 +32,6 @@ Getting Started
 
 
     code snippet:
-
     const blockchain = new PoSBlockchain(validators, currentValidatorAddress, [
     { address: 'existing-node-ip', port: 3000 },
     ]);
@@ -43,11 +40,10 @@ Getting Started
     This will connect your node to the existing node with the IP address existing-node-ip on port 3000.
 
     3. Join the Validator List
-        To join the validator list, you'll need to create and broadcast a ValidatorRegistrationTransaction. In the index.js file, you can do this by adding the following code snippet:
+        To join the validator list, you'll need to create and broadcast a ValidatorRegistrationTransaction. In the index.js file, you can do this by adding the following
 
         
         code snippet:
-        
         import { ValidatorRegistrationTransaction } from './transaction.js';
 
         // Replace these variables with your data
