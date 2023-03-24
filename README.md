@@ -5,19 +5,18 @@ Getting Started
 1. Initialize a New Node
     To start a new node, create an index.js file (if you haven't already) and use the following code snippet:
 
+
     import PoSBlockchain from './pos_blockchain.js';
     import fs from 'fs/promises';
-
     async function main() {
         const validatorData = JSON.parse(await fs.readFile('./validators.json', 'utf8'));
         const validators = validatorData.validators;
         const currentValidatorAddress = validatorData.CURRENT_VALIDATOR_ADDRESS;
-
         const blockchain = new PoSBlockchain(validators, currentValidatorAddress);
         blockchain.start();
     }
-
     main();
+
 
     This code initializes the PoS blockchain using the validators provided in the validators.json file.
 
@@ -26,11 +25,14 @@ Getting Started
 
     const blockchain = new PoSBlockchain(validators, currentValidatorAddress);
 
+
     Replace it with:
+
 
     const blockchain = new PoSBlockchain(validators, currentValidatorAddress, [
     { address: 'existing-node-ip', port: 3000 },
     ]);
+
 
     This will connect your node to the existing node with the IP address existing-node-ip on port 3000.
 
@@ -45,7 +47,6 @@ Getting Started
         const senderPublicKey = 'your-public-key';
         const newValidatorAddress = 'new-validator-address';
         const stakeAmount = 100;
-
         const utxos = await blockchain.getUnspentTransactionOutputs(senderPublicKey);
         const registrationTransaction = ValidatorRegistrationTransaction.createNewTransaction(
         senderPrivateKey,
