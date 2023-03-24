@@ -11,8 +11,9 @@ const validators = [
     new Validator('validator2', 150),
     new Validator('validator3', 200),
   ];
+  const currentValidator = validators[0];
   
-  const blockchain = new PoSBlockchain(validators);
+  const blockchain = new PoSBlockchain(validators,currentValidator);
 
   app.post('/jsonrpc', async (req, res) => {
     const { id, method, params } = req.body;

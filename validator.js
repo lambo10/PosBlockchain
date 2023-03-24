@@ -1,9 +1,10 @@
 class Validator {
-    constructor(address, stake, mining = false) {
+    constructor(address, stake, mining = false, rpcPort = 3590) {
       this.address = address;
       this.stake = stake;
       this.lastSelectedTimestamp = 0;
       this.mining = mining;
+      this.rpcPort = rpcPort;
     }
 
     startMining() {

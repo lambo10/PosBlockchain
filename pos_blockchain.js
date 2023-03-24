@@ -12,7 +12,7 @@ class PoSBlockchain {
     this.currentValidator = currentValidator;
     this.chainId = chainId;
     this.init();
-    this.p2pNode = new P2PNode(this.currentValidator.port, seedNodes, this.handleMessage.bind(this));
+    this.p2pNode = new P2PNode(this.currentValidator.rpcPort, seedNodes, this.handleMessage.bind(this));
   }
 
   async init() {

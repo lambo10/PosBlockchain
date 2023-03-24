@@ -44,7 +44,6 @@ Now you should be able to interact with your PoS blockchain using MetaMask.
 
 
 Deploying Smart Contracts on the PoS Blockchain
-In the PoS blockchain you've built, smart contracts are deployed using the SmartContract class. The SmartContract class allows you to create, deploy, execute transactions on, and validate transactions for a smart contract. Here's a step-by-step guide on how to deploy a smart contract to your PoS blockchain:
 
 1. Create a Smart Contract
 First, write the smart contract code in a separate file. For this example, let's assume you've written an ERC-20 token smart contract and saved it in a file called erc20_token.sol.
