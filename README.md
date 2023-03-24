@@ -1,88 +1,79 @@
-Custom Proof of Stake Blockchain Documentation
-This documentation covers the custom Proof of Stake (PoS) blockchain, including integration with MetaMask, starting a node and its APIs, and writing and deploying smart contracts to the blockchain.
+PoS Blockchain Documentation
 
-Overview
-The custom PoS blockchain consists of the following components:
+Getting Started
 
-    PoS consensus mechanism
-    Node and P2P communication
-    JSON-RPC API
-    Smart contract support with Solidity
-    Integration with MetaMask
+1. Initialize a New Node
+    To start a new node, create an index.js file (if you haven't already) and use the following code snippet:
 
-To add the custom PoS blockchain to MetaMask, follow these steps:
+    import PoSBlockchain from './pos_blockchain.js';
+    import fs from 'fs/promises';
 
-    Open MetaMask and click on the network dropdown (usually shows "Ethereum Mainnet").
-    Scroll down and click on "Custom RPC".
-    Fill in the following details:
-    Network Name: Enter a name for your custom PoS blockchain.
-    New RPC URL: Enter the URL of the JSON-RPC server (e.g., http://localhost:3590/jsonrpc).
-    Chain ID: Enter 94.
-    Currency Symbol (optional): Enter the symbol of the native cryptocurrency.
-    Block Explorer URL (optional): If available, provide the URL of the block explorer for your blockchain.
-    Click "Save" to add the custom PoS blockchain to MetaMask.
-    Now you can interact with the custom PoS blockchain using MetaMask.
+    async function main() {
+        const validatorData = JSON.parse(await fs.readFile('./validators.json', 'utf8'));
+        const validators = validatorData.validators;
+        const currentValidatorAddress = validatorData.CURRENT_VALIDATOR_ADDRESS;
 
-Starting a Node and its APIs
-To start a node, you'll first need to install the required dependencies:
-
-bash
-
-    npm install
-
-Then, run the following command to start the node:
-
-bash
-
-    npm start
-
-This command starts both the P2P node and the JSON-RPC server. The P2P node listens for incoming connections and handles message broadcasting, while the JSON-RPC server exposes the API for interacting with the blockchain.
-
-The JSON-RPC API supports the following methods:
-
-    getLatestBlock: Returns the latest block in the blockchain.
-    addTransaction: Adds a transaction to the blockchain.
-    You can extend the API with additional methods as needed for your specific use case.
-
-Writing and Deploying Smart Contracts
-To write a smart contract, you'll need to use the Solidity programming language. A simple example of a smart contract is as follows:
-
-solidity
-
-    pragma solidity ^0.8.0;
-    contract SimpleStorage {
-        uint256 private storedData;
-        function set(uint256 x) public {
-            storedData = x;
-        }
-        function get() public view returns (uint256) {
-            return storedData;
-        }
+        const blockchain = new PoSBlockchain(validators, currentValidatorAddress);
+        blockchain.start();
     }
 
-To deploy the smart contract to the custom PoS blockchain, follow these steps:
+    main();
 
-Compile the smart contract using the Solidity compiler, solc. This will generate a JSON file containing the contract's bytecode and ABI (Application Binary Interface).
+    This code initializes the PoS blockchain using the validators provided in the validators.json file.
 
-    Use a tool like Truffle or Hardhat to deploy the smart contract to the custom PoS blockchain.
-    Configure the deployment tool to use the JSON-RPC URL of your blockchain (e.g., http://localhost:3590/jsonrpc).
-    Specify the private key of the account that will deploy the smart contract.
-    Create a deployment script to deploy the smart contract using the bytecode and ABI generated in step 1.
-    Run the deployment script to deploy the smart contract to the custom PoS blockchain.
-    Once the smart contract is deployed, you can interact with it using the JSON-RPC API and MetaMask.
+2. Connect to an Existing Node
+    In the index.js file, to connect to an existing node, modify the following line:
 
-To connect more nodes to your network, simply run the index.js script with different port numbers and seed nodes as command-line arguments. For example, you can start two nodes with the following commands in separate terminals:
+    const blockchain = new PoSBlockchain(validators, currentValidatorAddress);
 
-Node 1:
+    Replace it with:
 
-bash
+    const blockchain = new PoSBlockchain(validators, currentValidatorAddress, [
+    { address: 'existing-node-ip', port: 3000 },
+    ]);
 
-node index.js 3000 localhost:3001
+    This will connect your node to the existing node with the IP address existing-node-ip on port 3000.
+
+    3. Join the Validator List
+        To join the validator list, you'll need to create and broadcast a ValidatorRegistrationTransaction. In the index.js file, you can do this by adding the following code snippet:
 
 
-Node 2:
+        import { ValidatorRegistrationTransaction } from './transaction.js';
 
-bash
+        // Replace these variables with your data
+        const senderPrivateKey = 'your-private-key';
+        const senderPublicKey = 'your-public-key';
+        const newValidatorAddress = 'new-validator-address';
+        const stakeAmount = 100;
 
-node index.js 3001 localhost:3000
-In this example, Node 1 listens on port 3000 and tries to connect to Node 2 (localhost:3001), while Node 2 listens on port 3001 and tries to connect to Node 1 (localhost:3000).
+        const utxos = await blockchain.getUnspentTransactionOutputs(senderPublicKey);
+        const registrationTransaction = ValidatorRegistrationTransaction.createNewTransaction(
+        senderPrivateKey,
+        senderPublicKey,
+        newValidatorAddress,
+        stakeAmount,
+        utxos
+        );
+        await blockchain.addTransaction(registrationTransaction);
+
+4. Set Validator Address and Port
+    In the validators.json file, you can set the CURRENT_VALIDATOR_ADDRESS field to the address of the validator you want to use:
+
+    {
+    "validators": [ ... ],
+    "CURRENT_VALIDATOR_ADDRESS": "your-validator-address"
+    }
+
+5. Add PoS Blockchain to MetaMask
+    To add your PoS blockchain to MetaMask, follow these steps:
+
+    Open MetaMask and click on the network dropdown at the top of the window.
+    Click on "Custom RPC" at the bottom of the list.
+    Fill in the "Network Name" with a name of your choice, for example, "My PoS Blockchain".
+    Enter the "New RPC URL", which should be the URL of the node you want to connect to (e.g., http://your-node-ip:your-node-port).
+    Leave the "Chain ID" field blank or enter a unique identifier for your blockchain.
+    (Optional) Fill in the "Currency Symbol" and "Block Explorer URL" fields.
+    Click "Save" to add your PoS blockchain to MetaMask.
+    Now you should be able to interact with your PoS blockchain using MetaMask.
+
+
