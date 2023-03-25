@@ -8,7 +8,7 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const port = process.argv[2] || 3000;
+const port = process.argv[2] || 3001;
 const seedNodes = process.argv.slice(3);
 
 const node = new P2PNode(port, seedNodes);
