@@ -1,10 +1,19 @@
 import net from 'net';
 import crypto from 'crypto';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 class P2PNode {
   constructor(port, seedNodes = []) {
     this.port = port;
-    this.peers = [...seedNodes];
+    
+    const seedNodesJsonPath = path.join(__dirname, 'seedNodes.json');
+    const seedNodesData = JSON.parse(fs.readFileSync(seedNodesJsonPath, 'utf8'));
+    
+    this.peers = seedNodesData;
     this.nodes = new Map();
     this.server = net.createServer(this.handleConnection.bind(this));
   }

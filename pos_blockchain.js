@@ -142,22 +142,7 @@ class PoSBlockchain {
     await this.broadcast(message);
   }
 
-  async addBlock(data, validatorAddress) {
-    const latestBlock = await this.getLatestBlock();
-    const index = latestBlock.index + 1;
-    const timestamp = Date.now();
-    const previousHash = latestBlock.hash;
-    const hash = this.calculateHash(index, previousHash, timestamp, data, validatorAddress);
 
-    const newBlock = new Block(index, previousHash, timestamp, data, hash, validatorAddress);
-    await this.storage.put(index, newBlock);
-    this.chain.push(newBlock);
-
-    // Broadcast the new block to other nodes in the network
-    await this.broadcastBlock(newBlock);
-
-    return newBlock;
-  }
 
   async broadcastBlock(block) {
     const message = {
